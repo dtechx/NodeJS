@@ -1,2 +1,2 @@
 # samples
-Nodejs fundamental
+Nodejs fundamentals
