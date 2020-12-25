@@ -18,16 +18,16 @@ router.post('/', async (req, res) => {
     const genre = await Genre.findById(req.body.genreId);
     if(!genre) return res.status(400).send('Invalid genre.');
 
-    let movie = new Movie({ 
+    const movie = new Movie({ // No need of let movie since id is created by mongoose
         name: req.body.title,
-        genre: { // Selece necessary properties from the genre object
+        genre: { // Select necessary properties from the genre object
             _id: genre._id,
             name: genre.name
         },
         numberInStock: req.body.numberInStock,
         dailyRentalRate: req.body.dailyRentalRate
     });
-    movie = await movie.save();
+    await movie.save(); // Assigning again to the variable movie is not needed since the id created by the mongoose and const has been used in above
     res.send(movie);
 });
 
