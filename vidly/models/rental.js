@@ -58,5 +58,5 @@ function validateRental(rental) {
     return schema.validate(rental, schema);
 }
 
-exports.Movie = Movie;
+exports.Rental = Rental;
 exports.validate = validateRental;
