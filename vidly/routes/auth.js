@@ -1,5 +1,3 @@
-const config = require('config');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const {User} = require('../models/user');
@@ -21,7 +19,11 @@ router.post('/', async (req, res) => {
     // Key can be stored on a environment variable
     // const token = jwt.sign({ _id: user._id }, 'ThisIsThejwtPrivateKeyString');
 
-    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
+    // Below line should be moved to a proper place to avoid duplication all over the application
+    // OOP Principle: Infomration Expert Principle
+    // const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
+
+    const token = user.generateAuthToken();
 
     res.send(token);
 });
