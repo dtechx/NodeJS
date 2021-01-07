@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     // res.send(_.pick(user, ['_id', 'name', 'email']));
 
     // Adding header
-    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
+    const token = user.generateAuthToken();
     res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
     // Custom header should have a prefix x- and give an arbitrary name
 
