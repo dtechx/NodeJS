@@ -1,3 +1,4 @@
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
@@ -16,9 +17,11 @@ router.post('/', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid email or password');
 
-    // Second parameter is teh private key and that should not be stored in the source code
-    // Key can be stored on a envirionment variable
-    const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey');
+    // Second parameter is the private key and that should not be stored in the source code
+    // Key can be stored on a environment variable
+    // const token = jwt.sign({ _id: user._id }, 'ThisIsThejwtPrivateKeyString');
+
+    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
 
     res.send(token);
 });
