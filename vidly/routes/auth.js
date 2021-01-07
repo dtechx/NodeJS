@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const {User} = require('../models/user');
@@ -15,7 +16,11 @@ router.post('/', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid email or password');
 
-    res.send(true);
+    // Second parameter is teh private key and that should not be stored in the source code
+    // Key can be stored on a envirionment variable
+    const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey');
+
+    res.send(token);
 });
 
 function  validate(req) {
