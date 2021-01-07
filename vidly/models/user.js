@@ -29,7 +29,8 @@ function validateUser(user) {
     const schema = Joi.object({
         name: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(50).required(),
+        password: Joi.string().min(5).max(50).required()
+        // Package joi-password-complexity can be used to validate password
     });
 
     return schema.validate(user);
