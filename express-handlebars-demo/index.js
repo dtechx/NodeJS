@@ -1,8 +1,11 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
+const morgan = require('morgan');
  
 var app = express();
- 
+
+app.use(morgan("dev"));
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
  
