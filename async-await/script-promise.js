@@ -12,7 +12,7 @@ function makeRequest(location) {
 function processRequest(response) {
     return new Promise((resolve, reject) => {
         console.log("Processing response");
-        resolve(`Extra information + ${response} `);
+        resolve(`Extra information + ${response}`);
     })
 }
 
